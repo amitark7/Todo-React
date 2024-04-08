@@ -1,5 +1,5 @@
 import React from "react";
-import { AiFillDelete } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
 import { BiSolidEditAlt } from "react-icons/bi";
 
 const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
@@ -32,7 +32,7 @@ const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
           ""
         )}
         <button className="text-lg text-black" onClick={() => deleteTodo(id)}>
-          <AiFillDelete />
+          <MdDelete />
         </button>
         <button className="text-lg text-black" onClick={() => updateTodo(id)}>
           <BiSolidEditAlt />

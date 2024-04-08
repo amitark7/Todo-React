@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const AddTodos = ({ addTodo, isEmpty }) => {
+const AddTodos = ({ addTodo, isEmpty, todos, todoId, isUpdate }) => {
   const [input, setInput] = useState("");
+
+  //This function get perticular task and update input box to update todo
+  const updateTodos = () => {
+    const todo = todos.find((todo) => todo.id === todoId);
+    if (todo) {
+      setInput(todo.todoText);
+    }
+  };
+
+  //We check index when isUpdate true or false
+  useEffect(() => {
+    updateTodos();
+  }, [isUpdate]);
 
   return (
     <div className="w-full mt-4">
-      <h3 className="font-semibold lg:text-2xl">Todo</h3>
+      <h3 className="font-semibold lg:text-2xl">Add Todo</h3>
       <input
         type="text"
         value={input}
@@ -22,7 +35,7 @@ const AddTodos = ({ addTodo, isEmpty }) => {
         }}
         className="border border-gray-300 p-2 rounded text-xs mt-2 font-semibold lg:text-base lg:px-4"
       >
-        Submit
+        {isUpdate ? "Update" : "Add"}
       </button>
     </div>
   );

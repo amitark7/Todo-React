@@ -5,20 +5,41 @@ import AddTodos from "./AddTodos";
 const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [todoId, setTodoId] = useState();
+  const [isUpdate, setIsUpdate] = useState(false);
 
   //Add new todo
   const addTodo = (todoText) => {
+    //if inputBox empty then we do nothing simply return or disabled the button and set border red of input box
     if (todoText.length === 0) {
       setIsEmpty(true);
       return;
     } else {
-      setIsEmpty(false);
-      const newTodo = {
-        id: Date.now(),
-        todoText,
-        iComplete: false,
-      };
-      setTodos([newTodo, ...todos]);
+      //Also we check index for updating task if findIndex>=0 then isUpdate true then we handle function according to isUpdate
+      const findIndex = todos.findIndex((todo) => todo.id === todoId);
+      if (findIndex >= 0) {
+        //We find object through todoID and update todo
+        setTodos(
+          todos.map((todo) => {
+            if (todo.id === todoId) {
+              return { ...todo, todoText };
+            } else {
+              return todo;
+            }
+          })
+        );
+        setTodoId();
+        setIsUpdate(false);
+      } else {
+        //If no index exist thats means we add the todo
+        setIsEmpty(false);
+        const newTodo = {
+          id: Date.now(),
+          todoText,
+          iComplete: false,
+        };
+        setTodos([newTodo, ...todos]);
+      }
     }
   };
 
@@ -42,23 +63,14 @@ const Todos = () => {
 
   //Update todo through prompt
   const updateTodo = (id) => {
-    const editedTodo = prompt("Edit the todo:");
-    if (editedTodo !== null) {
-      setTodos(
-        todos.map((todo) => {
-          if (todo.id === id) {
-            return { ...todo, todoText: editedTodo };
-          }
-        })
-      );
-    }
+    setTodoId(id);
+    setIsUpdate(true);
   };
+
   return (
     <div className="w-4/5 mx-auto mt-10 h-full">
       {todos.length === 0 ? (
-        <h1 className="mb-4 font-semibold text-lg text-center">
-          Todo Empty Add Task
-        </h1>
+        <h1 className="mb-4 font-semibold text-lg ">Todo is Empty</h1>
       ) : (
         <h1 className="mb-4 font-semibold text-lg">Todo App</h1>
       )}
@@ -73,7 +85,13 @@ const Todos = () => {
           />
         );
       })}
-      <AddTodos addTodo={addTodo} isEmpty={isEmpty} />
+      <AddTodos
+        addTodo={addTodo}
+        isEmpty={isEmpty}
+        todoId={todoId}
+        todos={todos}
+        isUpdate={isUpdate}
+      />
     </div>
   );
 };
