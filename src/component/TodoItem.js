@@ -2,7 +2,7 @@ import React from "react";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
+const TodoItem = ({ todoItem, handleIsComplete, selectTodoId, deleteTodo }) => {
   const { id, todoText, isComplete } = todoItem;
 
   const handleChange = () => {
@@ -34,7 +34,7 @@ const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
         <button className="text-lg text-black" onClick={() => deleteTodo(id)}>
           <MdDelete />
         </button>
-        <button className="text-lg text-black" onClick={() => updateTodo(id)}>
+        <button className="text-lg text-black" onClick={() => selectTodoId(id)}>
           <MdEdit />
         </button>
       </div>

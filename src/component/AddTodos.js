@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const AddTodos = ({ addTodo, isEmpty, todos, todoId, isUpdate }) => {
+const AddTodos = ({ addTodoAndUpdate, isEmpty, todos, todoId }) => {
   const [input, setInput] = useState("");
 
   //This function get perticular task and update input box to update todo
-  const updateTodos = () => {
+  const findTodo = () => {
     const todo = todos.find((todo) => todo.id === todoId);
     if (todo) {
       setInput(todo.todoText);
@@ -13,12 +13,14 @@ const AddTodos = ({ addTodo, isEmpty, todos, todoId, isUpdate }) => {
 
   //We check index when isUpdate true or false
   useEffect(() => {
-    updateTodos();
-  }, [isUpdate]);
+    findTodo();
+  }, [todoId]);
 
   return (
     <div className="w-full mt-4">
-      <h3 className="font-semibold lg:text-2xl">Add Todo</h3>
+      <h3 className="font-semibold lg:text-2xl">
+        {todoId ? "Update Todo" : "Add Todo"}
+      </h3>
       <input
         type="text"
         value={input}
@@ -30,12 +32,12 @@ const AddTodos = ({ addTodo, isEmpty, todos, todoId, isUpdate }) => {
       />
       <button
         onClick={() => {
-          addTodo(input);
+          addTodoAndUpdate(input);
           setInput("");
         }}
         className="border border-gray-300 p-2 rounded text-xs mt-2 font-semibold lg:text-base lg:px-4"
       >
-        {isUpdate ? "Update" : "Add"}
+        {todoId ? "Update" : "Add"}
       </button>
     </div>
   );

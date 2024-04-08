@@ -5,11 +5,10 @@ import AddTodos from "./AddTodos";
 const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [isEmpty, setIsEmpty] = useState(false);
-  const [todoId, setTodoId] = useState();
-  const [isUpdate, setIsUpdate] = useState(false);
+  const [todoId, setTodoId] = useState(null);
 
   //Add new todo
-  const addTodo = (todoText) => {
+  const addTodoAndUpdate = (todoText) => {
     //if inputBox empty then we do nothing simply return or disabled the button and set border red of input box
     if (todoText.length === 0) {
       setIsEmpty(true);
@@ -28,8 +27,8 @@ const Todos = () => {
             }
           })
         );
-        setTodoId();
-        setIsUpdate(false);
+        setTodoId(null);
+        setIsEmpty(false);
       } else {
         //If no index exist thats means we add the todo
         setIsEmpty(false);
@@ -62,9 +61,8 @@ const Todos = () => {
   };
 
   //Update todo through prompt
-  const updateTodo = (id) => {
+  const selectTodoId = (id) => {
     setTodoId(id);
-    setIsUpdate(true);
   };
 
   return (
@@ -81,16 +79,15 @@ const Todos = () => {
             todoItem={todoItem}
             handleIsComplete={handleIsComplete}
             deleteTodo={deleteTodo}
-            updateTodo={updateTodo}
+            selectTodoId={selectTodoId}
           />
         );
       })}
       <AddTodos
-        addTodo={addTodo}
+        addTodoAndUpdate={addTodoAndUpdate}
         isEmpty={isEmpty}
         todoId={todoId}
         todos={todos}
-        isUpdate={isUpdate}
       />
     </div>
   );
