@@ -1,6 +1,6 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
-import { BiSolidEditAlt } from "react-icons/bi";
+import { MdEdit } from "react-icons/md";
 
 const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
   const { id, todoText, isComplete } = todoItem;
@@ -20,7 +20,7 @@ const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
         />
         <p className="text-xs lg:text-base lg:ml-2">{todoText}</p>
       </div>
-      <div className="flex gap-6">
+      <div className="flex gap-1">
         {isComplete ? (
           <div
             className="
@@ -35,7 +35,7 @@ const TodoItem = ({ todoItem, handleIsComplete, updateTodo, deleteTodo }) => {
           <MdDelete />
         </button>
         <button className="text-lg text-black" onClick={() => updateTodo(id)}>
-          <BiSolidEditAlt />
+          <MdEdit />
         </button>
       </div>
     </div>
