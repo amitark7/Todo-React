@@ -11,7 +11,7 @@ const AddTodos = ({ addTodoAndUpdate, isEmpty, todos, todoId }) => {
     }
   };
 
-  //We check index when isUpdate true or false
+  //We run findTodo when todoID exist or not
   useEffect(() => {
     findTodo();
   }, [todoId]);
