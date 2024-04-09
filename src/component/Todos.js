@@ -60,7 +60,7 @@ const Todos = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  //Update todo through prompt
+  //Select TodoId to update todo
   const selectTodoId = (id) => {
     setTodoId(id);
   };
