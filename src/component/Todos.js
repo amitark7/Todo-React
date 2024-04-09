@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
-import AddTodos from "./AddTodos";
+import AddTodo from "./AddTodo";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -10,7 +10,7 @@ const Todos = () => {
   //Add new todo
   const addTodoAndUpdate = (todoText) => {
     //if inputBox empty then we do nothing simply return or disabled the button and set border red of input box
-    if (todoText.length === 0) {
+    if (todoText.trim().length === 0) {
       setIsEmpty(true);
       return;
     } else {
@@ -34,7 +34,7 @@ const Todos = () => {
         setIsEmpty(false);
         const newTodo = {
           id: Date.now(),
-          todoText,
+          todoText: todoText.trim(),
           iComplete: false,
         };
         setTodos([newTodo, ...todos]);
@@ -64,14 +64,11 @@ const Todos = () => {
   const selectTodoId = (id) => {
     setTodoId(id);
   };
-
   return (
     <div className="w-4/5 mx-auto mt-10 h-full">
-      {todos.length === 0 ? (
-        <h1 className="mb-4 font-semibold text-lg ">Todo is Empty</h1>
-      ) : (
-        <h1 className="mb-4 font-semibold text-lg">Todo App</h1>
-      )}
+      <h1 className="mb-4 font-semibold text-lg ">
+        {todos.length === 0 ? "Todo is Empty" : "Todo App"}
+      </h1>
       {todos.map((todoItem, index) => {
         return (
           <TodoItem
@@ -83,7 +80,7 @@ const Todos = () => {
           />
         );
       })}
-      <AddTodos
+      <AddTodo
         addTodoAndUpdate={addTodoAndUpdate}
         isEmpty={isEmpty}
         todoId={todoId}

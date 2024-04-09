@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const AddTodos = ({ addTodoAndUpdate, isEmpty, todos, todoId }) => {
+const AddTodo = ({ addTodoAndUpdate, isEmpty, todos, todoId }) => {
   const [input, setInput] = useState("");
 
   //This function get perticular task and update input box to update todo
@@ -43,4 +43,4 @@ const AddTodos = ({ addTodoAndUpdate, isEmpty, todos, todoId }) => {
   );
 };
 
-export default AddTodos;
+export default AddTodo;

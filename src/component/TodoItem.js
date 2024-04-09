@@ -21,15 +21,13 @@ const TodoItem = ({ todoItem, handleIsComplete, selectTodoId, deleteTodo }) => {
         <p className="text-xs lg:text-base lg:ml-2">{todoText}</p>
       </div>
       <div className="flex gap-1">
-        {isComplete ? (
+        {isComplete && (
           <div
             className="
           bg-green-100 rounded-2xl px-2 py-1"
           >
             <p className="text-xs font-semibold">Complete</p>
           </div>
-        ) : (
-          ""
         )}
         <button className="text-lg text-black" onClick={() => deleteTodo(id)}>
           <MdDelete />
